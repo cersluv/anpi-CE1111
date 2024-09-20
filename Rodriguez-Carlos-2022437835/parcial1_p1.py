@@ -27,7 +27,6 @@ def metodo_thomas(A, d):
     p[0] = c[0] / b[0]
     q[0] = d[0] / b[0]
 
-
     # Calcular p y q cuando i es distinto de 1 [2, 3, ... n]
     for i in range(1, n - 1):
         denominador = b[i] - p[i - 1] * a[i - 1] # necesario hacerlo acá, por que un valor se vuelve tan grande que excede la capacidad del tipo de dao utilzado (float64)
@@ -41,24 +40,24 @@ def metodo_thomas(A, d):
     x[-1] = q[-1]
     for i in range(n - 2, -1, -1):
         x[i] = q[i] - p[i] * x[i + 1]
-
     return x
 
 
 # Pregunta (b)
-# Crear la matriz tridiagonal A y el vector d
+# se crea la matriz A y el vector d
 n = 250
 A = np.zeros((n, n))
 d = np.zeros(n)
 
-# Llenar la matriz A
-for i in range(n):
+# llenar A
+for i in range(n):  # empieza en 0
     A[i, i] = 2 * (i + 1) # Diagonal
     if i < n - 1:
         A[i, i + 1] = i # Diganonal superior
-        A[i + 1, i] = i # Digonal inferior
-    d[i] = i + 1
-print(A[124,124])
+        A[i, i - 1] = i # Digonal inferior
+    d[i] = i + 1  # llenar el vector d
+
+
 # Calcular x
 x = metodo_thomas(A, d)
 
